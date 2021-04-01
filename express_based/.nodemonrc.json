@@ -1,0 +1,8 @@
+{
+  "watch": [
+    "server/**/*.*",
+    "test/**/*.*",
+    ".env"
+  ],
+  "ext": "js,json,yaml,yml"
+}
