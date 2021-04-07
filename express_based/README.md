@@ -1,11 +1,16 @@
 # nodejs-express-server-template
-A Node.js server template using express, supporting PostgreSQL, Redis and MongoDB database.
+A Node.js server template based on express, with DB connection of Sequelize.
+
+The example API connects PostgreSQL, Redis and MongoDB database.
 
 # 0 Getting started
-Install dependency first in root:
+Install dependency and initialize DB if not existed:
 
 ``` shell
 npm install
+
+docker run --name PostgreSQL -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=exampleDB -p 5432:5432 -d postgres
+
 ```
 
 Run server in development:
