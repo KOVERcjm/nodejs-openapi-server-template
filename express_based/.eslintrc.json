@@ -1,5 +1,9 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "sourceType": "module"
+  },
   "extends": [
     "airbnb-base",
     "plugin:prettier/recommended"
@@ -8,9 +12,6 @@
     "mocha": true,
     "es6": true,
     "node": true
-  },
-  "parserOptions": {
-    "sourceType": "module"
   },
   "rules": {
     "prettier/prettier": "error",

@@ -9,8 +9,9 @@ Install dependency and initialize DB if not existed:
 ``` shell
 npm install
 
-docker run --name PostgreSQL -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=exampleDB -p 5432:5432 -d postgres
-
+docker run --name PostgreSQL --restart always -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=examplePg -p 5432:5432 -d postgres
+docker run --name Mongo --restart always -e MONGO_INITDB_ROOT_USERNAME=mongo -e MONGO_INITDB_ROOT_PASSWORD=12345 -e MONGO_INITDB_DATABASE=exampleMongo -p 27017:27017 -d mongo
+docker run --name Redis --restart always -p 6379:6379 -d redis redis-server --appendonly yes --requirepass "12345"
 ```
 
 Run server in development:

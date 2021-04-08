@@ -1,17 +1,37 @@
-const db = require('../../common/db');
+const db = require('../../common/db.connection');
 
-const pg_create = targetId => db.pg_examples.create({ id: targetId });
-
-const pg_update = (targetId, data) =>
-  db.pg_examples.update(
+const pgCreate = (id, data) => db.pgExamples.create({ id, data });
+const pgUpdate = (id, data) =>
+  db.pgExamples.update(
     { data },
     {
-      where: { id: targetId }
+      where: { id }
     }
   );
+const pgRetrieve = id => db.pgExamples.findAll({ attributes: ['data'], where: { id } });
+const pgDelete = id => db.pgExamples.destroy({ where: { id } });
 
-const pg_retrieve = targetId => db.pg_examples.findAll({ attributes: ['data'], where: { id: targetId } });
+const mongoCreate = (key, value) => db.mongoExamples.create({ key, value });
+const mongoUpdate = (key, value) => db.mongoExamples.updateOne({ key }, { value });
+const mongoRetrieve = key => db.mongoExamples.findOne({ key });
+const mongoDelete = key => db.mongoExamples.remove({ key });
 
-const pg_deleteId = targetId => db.pg_examples.destroy({ where: { id: targetId } });
+const redisCreate = (key, value) => db.redisDb0.set(key, value);
+const redisUpdate = (key, value) => db.redisDb0.set(key, value);
+const redisRetrieve = key => db.redisDb0.get(key);
+const redisDelete = key => db.redisDb0.del(key);
 
-module.exports = { pg_create, pg_update, pg_retrieve, pg_deleteId };
+module.exports = {
+  pgCreate,
+  pgUpdate,
+  pgRetrieve,
+  pgDelete,
+  mongoCreate,
+  mongoUpdate,
+  mongoRetrieve,
+  mongoDelete,
+  redisCreate,
+  redisUpdate,
+  redisRetrieve,
+  redisDelete
+};

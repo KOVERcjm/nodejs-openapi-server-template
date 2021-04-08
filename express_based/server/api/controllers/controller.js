@@ -5,13 +5,20 @@ const example = async (req, res) => {
   const functionCaller = 'POST /example -';
   l.debug(`${functionCaller} Function called.`);
 
-  await db.pg_create('asdf');
+  await db.pgCreate('asdf', 123);
+  await db.pgUpdate('asdf', 456);
+  await db.pgRetrieve('asdf');
+  await db.pgDeleteId('asdf');
 
-  await db.pg_update('asdf', 123);
+  await db.mongoCreate('asdf', 123);
+  await db.mongoUpdate('asdf', 456);
+  await db.mongoRetrieve('asdf');
+  await db.mongoDeleteId('asdf');
 
-  const data = await db.pg_retrieve('asdf');
-
-  await db.pg_deleteId('asdf');
+  await db.redisCreate('asdf', 123);
+  await db.redisUpdate('asdf', 456);
+  await db.redisRetrieve('asdf');
+  await db.redisDeleteId('asdf');
 
   res.status(200).end();
 };

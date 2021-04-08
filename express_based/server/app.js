@@ -42,11 +42,17 @@ app.use(errorHandler);
 
 const port = process.env.PORT;
 const welcome = () =>
-  l.info(`Server up and running in ${process.env.NODE_ENV || 'development'} on port: ${port}`);
-http.createServer(app).listen(port, welcome);
+  l.info(`[Server] - Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
+
+const server = http.createServer(app).listen(port, welcome);
 
 // If would like to create https server, use the following lines to replace the above one
 
 // const key = fs.readFileSync(`${__dirname}/cert/private.key`);
 // const cert = fs.readFileSync(`${__dirname}/cert/certificate.crt`);
-// https.createServer({ key, cert }, app).listen(port, welcome);
+// const server = https.createServer({ key, cert }, app).listen(port, welcome);
+
+process.on('exit', () => {
+  server.close();
+  l.fatal(`[Server] - TERMINATED.\n`);
+});
