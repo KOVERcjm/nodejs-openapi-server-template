@@ -30,11 +30,11 @@ npm run test
 
 To build this server, we using [Node.js](https://nodejs.org/) as programming language and [express](http://expressjs.com/) as web framework, following OpenAPI 3.0 Specification. Due to Node.js [following](https://nodejs.org/en/knowledge/getting-started/what-is-require/) the CommonJS module system, we will also follow the same specification.
 
-# 2 Technical Details
+# 2 Technical Details (to be updated)
 
 ## 2.1 Modules to launch a server
 
-In `./package.json`, describes scripts to launch the server. Like `"dev": "nodemon index.js --exec babel-node --config .nodemonrc.json | pino-pretty"` means that when you type `npm run dev`, it will use `nodemon` tool to launch `index.js`running under babel-node CLI. 
+In `./package.json`, describes scripts to launch the server. Like `"dev": "nodemon index.js --exec babel-node --config .nodemonrc.json"` means that when you type `npm run dev`, it will use `nodemon` tool to launch `index.js`running under babel-node CLI. 
 
 > **nodemon** is a tool that helps develop node.js based applications by automatically restarting the node application when file changes.
 >

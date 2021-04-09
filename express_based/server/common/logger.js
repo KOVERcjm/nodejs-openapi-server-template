@@ -1,7 +1,8 @@
-const l = require('pino')({
-  name: process.env.APP_ID,
-  level: process.env.LOG_LEVEL,
-  prettyPrint: { colorize: true, ignore: 'pid,hostname', translateTime: 'SYS:m/d H:M:s' }
+const logger = require('log4js').configure({
+  appenders: {
+    stdout: { type: 'stdout', layout: { type: 'pattern', pattern: '%[%d{hh:mm:ss} %p %c - %m%]' } }
+  },
+  categories: { default: { appenders: ['stdout'], level: process.env.LOG_LEVEL || 'trace' } }
 });
 
-module.exports = l;
+module.exports = logger;

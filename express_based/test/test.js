@@ -1,24 +1,13 @@
 const { expect } = require('chai');
-const request = require('supertest');
-const dotenv = require('dotenv');
+const request = require('supertest')('http://localhost:3000');
 
-dotenv.config();
-
-const app = require('../server/app');
-
-let server;
+require('../server/app');
 
 describe('Example test', () => {
-  beforeEach(() => {
-    server = app.listen(3000);
+  it('should return 200', done => {
+    request.post('/api/v1/example').end((err, res) => {
+      expect(res.status).to.equal(200);
+      done();
+    });
   });
-  afterEach(done => {
-    server.close(done);
-  });
-  it('example API', () =>
-    request(server)
-      .post('/api/v1/example')
-      .then(res => {
-        expect(res.status).to.equal(200);
-      }));
 });

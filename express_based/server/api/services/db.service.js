@@ -14,7 +14,7 @@ const pgDelete = id => db.pgExamples.destroy({ where: { id } });
 const mongoCreate = (key, value) => db.mongoExamples.create({ key, value });
 const mongoUpdate = (key, value) => db.mongoExamples.updateOne({ key }, { value });
 const mongoRetrieve = key => db.mongoExamples.findOne({ key });
-const mongoDelete = key => db.mongoExamples.remove({ key });
+const mongoDelete = key => db.mongoExamples.deleteOne({ key });
 
 const redisCreate = (key, value) => db.redisDb0.set(key, value);
 const redisUpdate = (key, value) => db.redisDb0.set(key, value);

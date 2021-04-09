@@ -2,17 +2,17 @@ const { Sequelize, DataTypes } = require('sequelize');
 const mongoose = require('mongoose');
 const Redis = require('ioredis');
 
-const l = require('./logger');
+const logger = require('./logger').getLogger('[DB Connection]');
 
 // PostgreSQL Connection
 const _pg = new Sequelize(process.env.PGCONNECTURL, {
-  logging: sql => l.trace(sql),
+  logging: sql => logger.trace(sql),
   dialectOptions: { ssl: false }
 });
 
 (async () => {
   await _pg.authenticate().catch(err => {
-    l.fatal(`[Server] - PostgreSQL DB error: ${err}`);
+    logger.fatal(`[Server] - PostgreSQL DB error: ${err}`);
     process.exit();
   });
   await _pg.sync({ alter: true });
@@ -36,7 +36,7 @@ const _mongo = mongoose
     useUnifiedTopology: true
   })
   .on('error', err => {
-    l.fatal(`[Server] - Mongo DB error: ${err}\n`);
+    logger.fatal(`[Server] - Mongo DB error: ${err}\n`);
     process.exit();
   });
 
@@ -49,7 +49,7 @@ const mongoExamples = _mongo.model('example', _exampleSchema);
 
 // Redis Connection
 const redisDb0 = new Redis(process.env.REDISCONNECTURL).on('error', err => {
-  l.fatal(`[Server] - Redis DB error: ${err}`);
+  logger.fatal(`[Server] - Redis DB error: ${err}`);
   process.exit();
 });
 

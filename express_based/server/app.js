@@ -11,7 +11,7 @@ const multer = require('multer');
 const path = require('path');
 
 const errorHandler = require('./middlewares/error.handler');
-const l = require('./common/logger');
+const logger = require('./common/logger').getLogger('[Server]');
 const router = require('./api/controllers/router');
 
 const app = express();
@@ -42,7 +42,7 @@ app.use(errorHandler);
 
 const port = process.env.PORT;
 const welcome = () =>
-  l.info(`[Server] - Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
+  logger.info(`Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
 
 const server = http.createServer(app).listen(port, welcome);
 
@@ -54,5 +54,7 @@ const server = http.createServer(app).listen(port, welcome);
 
 process.on('exit', () => {
   server.close();
-  l.fatal(`[Server] - TERMINATED.\n`);
+  logger.fatal(`TERMINATED.\n`);
 });
+
+module.export = app;
