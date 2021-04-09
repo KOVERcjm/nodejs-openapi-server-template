@@ -1,0 +1,51 @@
+{
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "requireConfigFile": false,
+    "sourceType": "module"
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:prettier/recommended"
+  ],
+  "env": {
+    "mocha": true,
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-underscore-dangle": 0,
+    "no-var": "error",
+    "class-methods-use-this": [
+      "off"
+    ],
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": false
+      }
+    ],
+    "node/no-unpublished-import": [
+      "off"
+    ],
+    "arrow-parens": [
+      "error",
+      "as-needed",
+      {
+        "requireForBlockBody": false
+      }
+    ],
+    "no-console": "error",
+    "eqeqeq": 2,
+    "indent": [
+      "error",
+      2
+    ],
+    "yoda": [
+      2,
+      "always"
+    ]
+  }
+}
