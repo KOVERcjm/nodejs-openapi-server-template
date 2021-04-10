@@ -1,10 +1,15 @@
 const logger = require('../../common/logger');
+const api = require('../services/api.service');
 const db = require('../services/db.service');
 
 const example = async (req, res) => {
   const l = logger.getLogger(`[${req.method} ${req.url}]`);
   l.debug(`API been called.`);
 
+  // Test API call function (mock Microsoft website as an internal API)
+  await api.call(l, 'GET', 'https://www.microsoft.com', '/');
+
+  // Test DB connection
   await db.pgCreate('asdf', 123);
   await db.pgUpdate('asdf', 456);
   await db.pgRetrieve('asdf');
