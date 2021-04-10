@@ -20,7 +20,7 @@ docker run --name Redis --restart always -p 6379:6379 -d redis redis-server --ap
 Test server:
 
 ```shell
-npm run test
+npm test
 ```
 
 Run server in development:
