@@ -12,7 +12,7 @@ const _pg = new Sequelize(process.env.PGCONNECTURL, {
 
 (async () => {
   await _pg.authenticate().catch(err => {
-    logger.fatal(`[Server] - PostgreSQL DB error: ${err}`);
+    logger.fatal(`[PostgreSQL DB] ${err}`);
     process.exit();
   });
   await _pg.sync({ alter: true });
@@ -36,7 +36,7 @@ const _mongo = mongoose
     useUnifiedTopology: true
   })
   .on('error', err => {
-    logger.fatal(`[Server] - Mongo DB error: ${err}\n`);
+    logger.fatal(`[Mongo DB] ${err}\n`);
     process.exit();
   });
 
@@ -49,7 +49,7 @@ const mongoExamples = _mongo.model('example', _exampleSchema);
 
 // Redis Connection
 const redisDb0 = new Redis(process.env.REDISCONNECTURL).on('error', err => {
-  logger.fatal(`[Server] - Redis DB error: ${err}`);
+  logger.fatal(`[Redis DB] ${err}`);
   process.exit();
 });
 

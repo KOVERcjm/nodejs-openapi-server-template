@@ -1,19 +1,22 @@
-const l = require('../common/logger');
+const logger = require('../common/logger');
 
-const errorHandler = (err, req, res) => {
+const errorHandler = (err, req, res, next) => {
   if (req) {
     const requestUrl = req.url;
     const url = requestUrl.substring(
       requestUrl.includes('/api/v') ? 7 : 0,
       requestUrl.includes('?') ? requestUrl.indexOf('?') : requestUrl.length
     );
-    l.debug(`${req.method} ${url} - Error: ${err.message}`);
-    l.info(`${req.method} ${url} - Error occurred. Action Failed.\n`);
+    const l = logger.getLogger(`[${req.method} ${url}]`);
+    l.debug(`${err.stack}`);
+    l.info(`Error occurred. Action Failed.\n`);
     res.status(403).json({ message: err.message });
   } else {
-    l.warn(`[Unhandled ERROR]: ${err}\n`);
-    res.status(500).json({ error: 'Internal server error' });
+    const l = logger.getLogger('[Server]');
+    l.warn(`Error occured. Action Failed: ${err.stack}\n`);
+    res.status(500).json({ message: 'Internal server error' });
   }
+  next();
 };
 
 module.exports = errorHandler;
