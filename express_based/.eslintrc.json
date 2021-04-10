@@ -15,6 +15,14 @@
   },
   "rules": {
     "prettier/prettier": "error",
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": [
+          "**/*.test.js"
+        ]
+      }
+    ],
     "no-underscore-dangle": 0,
     "no-var": "error",
     "class-methods-use-this": [
