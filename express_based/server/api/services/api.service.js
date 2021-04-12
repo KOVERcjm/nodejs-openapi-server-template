@@ -29,7 +29,7 @@ const call = async (l, method, baseURL, url, data) => {
 
   l.debug(`API response data: ${inspect(response.data)}`);
   l.info(`API respond: [${response.status} ${response.statusText}]`);
-  
+
   return response.data;
 };
 

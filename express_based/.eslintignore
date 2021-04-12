@@ -1,5 +1,4 @@
-node_modules/
 dist/
-public/api-explorer/
-*.yaml
+node_modules/
+public/
 *.yml
