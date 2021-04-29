@@ -36,6 +36,7 @@ npm run compile
 npm start
 ```
 
+
 # 2 Project Directories
 
 - `/public` - Swagger pages for illustration for APIs
@@ -49,11 +50,13 @@ npm start
   - `app.js` - create an API server application
 - `/test` - testing programs using `Mocha` framework to test the endpoints or code unit tests
 
+
 # 3 How to use
 
 1. Search and replace all 'templatevalue' in this project with your project name or description.
 2. Replace all '3000' in `.env Dockerfile api.yml` with actual port number you want to use.
 3. Have fun.
+
 
 # 4 Dockerize
 
@@ -65,6 +68,7 @@ Run `docker build` command to pack the server into an image. The following is fo
 docker build -t my_app .
 docker run -d --name my_app -p 3000:3000 my_app
 ```
+
 
 # 5 Reference
 
