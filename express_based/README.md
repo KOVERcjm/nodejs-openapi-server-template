@@ -10,6 +10,10 @@ Install dependency and initialize DB via Docker (if not existed):
 ``` shell
 npm install
 
+# Generate self-signed cert if necessary.
+openssl req -x509 -new -nodes -sha256 -utf8 -days 365 -newkey rsa:4096 -subj '/CN=localhost' -keyout server/cert/private.key -out server/cert/certificate.crt
+
+# Start DB via Docker if necessary
 docker run --name PostgreSQL --restart always -e POSTGRES_PASSWORD=12345 -e POSTGRES_DB=examplePg -p 5432:5432 -d postgres
 
 docker run --name Mongo --restart always -e MONGO_INITDB_ROOT_USERNAME=mongo -e MONGO_INITDB_ROOT_PASSWORD=12345 -e MONGO_INITDB_DATABASE=exampleMongo -p 27017:27017 -d mongo
