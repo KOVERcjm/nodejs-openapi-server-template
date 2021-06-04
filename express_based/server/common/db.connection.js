@@ -1,30 +1,42 @@
-const { Sequelize, DataTypes } = require('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 const mongoose = require('mongoose');
 const Redis = require('ioredis');
 
 const logger = require('./logger').getLogger('[DB Connection]');
 
 // PostgreSQL Connection
-const _pg = new Sequelize(process.env.PGCONNECTURL, {
-  logging: sql => logger.trace(sql),
+const _pgConnection = new Sequelize(process.env.PGCONNECTURL, {
+  logging: sql => {
+    logger.trace(sql);
+  },
   dialectOptions: { ssl: false }
 });
 
 (async () => {
-  await _pg.authenticate().catch(err => {
+  await _pgConnection.authenticate().catch(err => {
     logger.fatal(`[PostgreSQL DB] ${err}`);
     process.exit();
   });
-  await _pg.sync({ alter: true });
+  await _pgConnection.sync({ alter: true });
 })();
 
-const pgExamples = _pg.define(
-  'example',
+class PgExamples extends Model {}
+PgExamples.init(
   {
-    id: { type: DataTypes.STRING, allowNull: false, primaryKey: true },
-    data: { type: DataTypes.INTEGER, defaultValue: 0 }
+    id: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      primaryKey: true
+    },
+    data: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    }
   },
-  { timestamps: false }
+  {
+    sequelize: _pgConnection,
+    timestamps: false
+  }
 );
 
 // Mongo Connection
@@ -53,4 +65,4 @@ const redisDb0 = new Redis(process.env.REDISCONNECTURL).on('error', err => {
   process.exit();
 });
 
-module.exports = { pgExamples, mongoExamples, redisDb0 };
+module.exports = { PgExamples, mongoExamples, redisDb0 };

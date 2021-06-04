@@ -1,15 +1,15 @@
 const db = require('../../common/db.connection');
 
-const pgCreate = (id, data) => db.pgExamples.create({ id, data });
+const pgCreate = (id, data) => db.PgExamples.create({ id, data });
 const pgUpdate = (id, data) =>
-  db.pgExamples.update(
+  db.PgExamples.update(
     { data },
     {
       where: { id }
     }
   );
-const pgRetrieve = id => db.pgExamples.findAll({ attributes: ['data'], where: { id } });
-const pgDelete = id => db.pgExamples.destroy({ where: { id } });
+const pgRetrieve = id => db.PgExamples.findAll({ attributes: ['data'], where: { id } });
+const pgDelete = id => db.PgExamples.destroy({ where: { id } });
 
 const mongoCreate = (key, value) => db.mongoExamples.create({ key, value });
 const mongoUpdate = (key, value) => db.mongoExamples.updateOne({ key }, { value });
