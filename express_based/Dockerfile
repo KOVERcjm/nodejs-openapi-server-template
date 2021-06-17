@@ -17,7 +17,7 @@ WORKDIR /app/example_app/
 
 COPY --from=builder /app .
 
-RUN apk add --no-cache --update nodejs nodejs-npm
+RUN apk add --no-cache --update nodejs npm
 
 ENV NODE_ENV production
 
