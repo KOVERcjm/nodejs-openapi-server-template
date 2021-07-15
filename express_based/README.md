@@ -41,7 +41,14 @@ npm start
 ```
 
 
-# 2 Project Directories
+# 2 How to use
+
+1. Search and replace all 'templatevalue' in this project with your project name or description.
+2. Replace all '3000' in `.env Dockerfile api.yml` with actual port number you want to use.
+3. Have fun.
+
+
+# 3 Project Directories
 
 - `/public` - Swagger pages for illustration for APIs
 - `/server` - API server
@@ -53,13 +60,6 @@ npm start
   - `/middlewares` - store express middlewares like error handler
   - `app.js` - create an API server application
 - `/test` - testing programs using `Mocha` framework to test the endpoints or code unit tests
-
-
-# 3 How to use
-
-1. Search and replace all 'templatevalue' in this project with your project name or description.
-2. Replace all '3000' in `.env Dockerfile api.yml` with actual port number you want to use.
-3. Have fun.
 
 
 # 4 Dockerize

@@ -2,9 +2,8 @@ FROM node AS builder
 
 WORKDIR /app
 
-COPY public ./public
-COPY package*.json .env ./
-COPY server ./server
+COPY . .
+
 RUN npm install \
   && npm run compile \
   && rm -rf server node_modules \
@@ -13,7 +12,7 @@ RUN npm install \
 
 FROM alpine
 
-WORKDIR /app/example_app/
+WORKDIR /app
 
 COPY --from=builder /app .
 

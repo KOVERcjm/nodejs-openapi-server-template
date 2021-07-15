@@ -1,0 +1,14 @@
+.babelrc
+.dockerignore
+.DS_Store
+.eslintignore
+.eslintrc.json
+.gitignore
+.idea
+.nodemonrc.json
+.prettierrc
+dist
+node_modules
+package-lock.json
+Dockerfile
+test
