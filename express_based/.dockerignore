@@ -3,6 +3,7 @@
 .DS_Store
 .eslintignore
 .eslintrc.json
+.git
 .gitignore
 .idea
 .nodemonrc.json
