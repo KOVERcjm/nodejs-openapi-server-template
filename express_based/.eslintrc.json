@@ -6,7 +6,12 @@
   },
   "extends": [
     "airbnb-base",
+    "prettier",
     "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "prettier",
+    "promise"
   ],
   "env": {
     "mocha": true,
@@ -14,7 +19,21 @@
     "node": true
   },
   "rules": {
-    "prettier/prettier": "error",
+    "arrow-parens": [
+      "error",
+      "as-needed",
+      {
+        "requireForBlockBody": false
+      }
+    ],
+    "class-methods-use-this": [
+      "off"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "eqeqeq": 2,
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -23,34 +42,27 @@
         ]
       }
     ],
-    "no-underscore-dangle": 0,
-    "no-var": "error",
-    "class-methods-use-this": [
-      "off"
-    ],
-    "no-use-before-define": [
+    "indent": [
       "error",
+      2,
       {
-        "functions": false,
-        "classes": false
-      }
-    ],
-    "node/no-unpublished-import": [
-      "off"
-    ],
-    "arrow-parens": [
-      "error",
-      "as-needed",
-      {
-        "requireForBlockBody": false
+        "SwitchCase": 1
       }
     ],
     "no-console": "error",
-    "eqeqeq": 2,
-    "indent": [
+    "no-underscore-dangle": 0,
+    "no-use-before-define": [
       "error",
-      2
+      {
+        "classes": false,
+        "functions": false
+      }
     ],
+    "no-var": "error",
+    "node/no-unpublished-import": [
+      "off"
+    ],
+    "prettier/prettier": "error",
     "yoda": [
       2,
       "always"

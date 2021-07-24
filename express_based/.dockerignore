@@ -1,0 +1,26 @@
+# Ignore Git Related
+.git
+.gitignore
+
+# Ignore Docker Related
+.dockerignore
+Dockerfile
+
+# Ignore MacOS Related
+.DS_Store
+
+# Ignore JetBrains Related
+.idea
+
+# Ignore Node.js Related
+.nodemonrc.json
+dist
+node_modules
+package-lock.json
+test
+
+# Ignore format Related
+.babelrc
+.eslintignore
+.eslintrc.json
+.prettierrc

@@ -4,7 +4,7 @@ const db = require('../services/db.service');
 
 const example = async (req, res) => {
   const l = logger.getLogger(`[${req.method} ${req.url}]`);
-  l.debug(`API been called.`);
+  l.debug(`Endpoint been called.`);
 
   // Test API call function (mock Microsoft website as an internal API)
   await api.call(l, 'GET', 'https://www.microsoft.com', '/');
@@ -25,8 +25,16 @@ const example = async (req, res) => {
   await db.redisRetrieve('asdf');
   await db.redisDelete('asdf');
 
-  l.info('API responded.\n');
+  l.info('Endpoint responded.\n');
   res.status(200).end();
 };
 
-module.exports = { example };
+const fileUpload = async (req, res) => {
+  const l = logger.getLogger(`[${req.method} ${req.url}]`);
+  l.info(req.files);
+
+  l.info('Endpoint responded.\n');
+  res.status(200).end();
+};
+
+module.exports = { example, fileUpload };

@@ -1,10 +1,9 @@
-FROM node AS builder
+FROM node:alpine AS builder
 
 WORKDIR /app
 
-COPY public ./public
-COPY package*.json .env ./
-COPY server ./server
+COPY . .
+
 RUN npm install \
   && npm run compile \
   && rm -rf server node_modules \
@@ -13,11 +12,11 @@ RUN npm install \
 
 FROM alpine
 
-WORKDIR /app/example_app/
+WORKDIR /app
 
 COPY --from=builder /app .
 
-RUN apk add --no-cache --update nodejs nodejs-npm
+RUN apk add --no-cache --update nodejs npm
 
 ENV NODE_ENV production
 

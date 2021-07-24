@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 require('dotenv').config();
@@ -12,7 +13,6 @@ const path = require('path');
 
 const errorHandler = require('./middlewares/error.handler');
 const logger = require('./common/logger').getLogger('[Server]');
-const router = require('./api/controllers/router');
 
 const app = express();
 const apiSpec = path.join(__dirname, 'common/api.yml');
@@ -21,9 +21,9 @@ const validateResponses = !!(
   'true' === process.env.OPENAPI_ENABLE_RESPONSE_VALIDATION.toLowerCase()
 );
 
-app.use(express.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
-app.use(express.urlencoded({ extended: true, limit: process.env.REQUEST_LIMIT || '100kb' }));
-app.use(express.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: process.env.REQUEST_LIMIT || '100kb' }));
+app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(cors());
 app.use(express.static(path.normalize(`${__dirname}/../public`)));
@@ -31,18 +31,15 @@ app.use(process.env.OPENAPI_SPEC || '/spec', express.static(apiSpec));
 app.use(
   openApiValidator.middleware({
     apiSpec,
-    validateResponses,
-    fileUploader: { storage: multer.memoryStorage() }
+    fileUploader: { storage: multer.memoryStorage() },
+    operationHandlers: path.join(__dirname, 'common'),
+    validateResponses
   })
 );
-Object.keys(router).forEach(v => {
-  app.use(`/api/${v}/`, router[v]);
-});
 app.use(errorHandler);
 
 const port = process.env.PORT;
-const welcome = () =>
-  logger.info(`Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
+const welcome = () => logger.info(`Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
 
 const server = http.createServer(app).listen(port, welcome);
 
