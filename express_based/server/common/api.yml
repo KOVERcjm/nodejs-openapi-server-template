@@ -9,16 +9,29 @@ servers:
 paths:
   /example:
     post:
-      summary: Create a new example
-      # requestBody:
-      #   description: Example body
-      #   content:
-      #     application/json:
-      #       schema:
-      #         $ref: '#/components/schemas/ExampleBody'
-      #   required: true
+      summary: Example API for testing Axios and DB connection
+      x-eov-operation-id: example
+      x-eov-operation-handler: ../api/handlers/handler
       responses:
         200:
+          description: Success
+        403:
+          description: Fail
+
+  /file:
+    post:
+      summary: Example API for testing file upload
+      x-eov-operation-id: fileUpload
+      x-eov-operation-handler: ../api/handlers/handler
+      requestBody:
+        description: Example body
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ExampleBody'
+        required: true
+      responses:
+        201:
           description: Success
         403:
           description: Fail
@@ -26,10 +39,11 @@ paths:
 components:
   schemas:
     ExampleBody:
-      title: example
-      required:
-        - name
+      title: exampleBody
       type: object
+      required:
+        - file
       properties:
-        name:
+        file:
           type: string
+          format: binary

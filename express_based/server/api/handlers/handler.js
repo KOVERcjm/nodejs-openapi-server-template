@@ -29,4 +29,12 @@ const example = async (req, res) => {
   res.status(200).end();
 };
 
-module.exports = { example };
+const fileUpload = async (req, res) => {
+  const l = logger.getLogger(`[${req.method} ${req.url}]`);
+  l.info(req.files);
+
+  l.info('Endpoint responded.\n');
+  res.status(200).end();
+};
+
+module.exports = { example, fileUpload };
