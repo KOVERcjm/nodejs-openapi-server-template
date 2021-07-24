@@ -53,12 +53,12 @@ npm start
 - `/public` - Swagger pages for illustration for APIs
 - `/server` - API server
   - `/api` - server endpoints source code
-    - `/controller` - controllers and routers for all endpoints, can devided to different versions or different function groups
+    - `/handlers` - handlers for all endpoints, refer to path of x-eov-operation-handler and x-eov-operation-id in `/server/common/api.yml`
     - `/services` - internal services for controllers to use, like DB service and internal API call service 
   - `/cert` - place the server's HTTPS crt and key file here (remind to use the HTTPS codes in `server/app.js`)
   - `/common` - `api.yml` for describe the API server following OpenAPI specification, `db.connection.js` for establishing DB connection in basic level, and `logger.js` using `log4js` library to prettier the log output
   - `/middlewares` - store express middlewares like error handler
-  - `app.js` - create an API server application
+  - `app.js` - create a server application
 - `/test` - testing programs using `Mocha` framework to test the endpoints or code unit tests
 
 
@@ -77,4 +77,4 @@ docker run -d --name my_app -p 3000:3000 my_app
 # 5 Reference
 
 - [OpenAPI 3.0 Specification](https://swagger.io/specification/)
-- [generator-express-no-stress](https://github.com/cdimascio/generator-express-no-stress)
+- [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator)
