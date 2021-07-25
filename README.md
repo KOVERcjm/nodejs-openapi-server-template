@@ -1,8 +1,9 @@
-# nodejs-openapi-server-template
-A backend API server template based on express, with DB connection of PostgreSQL, Redis and MongoDB.
+# Node.js OpenAPI Server Template
+A backend API server template based on Koa, with DB connection of PostgreSQL, Redis and MongoDB.
 
-This server is built using [Node.js](https://nodejs.org/) as programming language and [express](http://expressjs.com/) as web framework, following OpenAPI 3.0 Specification. Due to Node.js [following](https://nodejs.org/en/knowledge/getting-started/what-is-require/) the CommonJS module system, this server will also follow the same specification.
+This server is built using [Node.js](https://nodejs.org/) as programming language and [Koa](https://koajs.com/) as web framework, following OpenAPI 3.0 Specification. Due to Node.js [following](https://nodejs.org/en/knowledge/getting-started/what-is-require/) the CommonJS module system, this server will also follow the same specification.
 
+[express](http://expressjs.com/) version can be found in [this branch](https://github.com/KOVERcjm/nodejs-openapi-server-template/tree/Express_based).
 
 # 0 Getting started
 Install dependency and initialize DB via Docker (if not existed):
@@ -50,14 +51,13 @@ npm start
 
 # 3 Project Directories
 
-- `/public` - Swagger pages for illustration for APIs
+- `/public` - Swagger pages for illustration for APIs, `api.yml` for describe the API server following OpenAPI specification
 - `/server` - API server
   - `/api` - server endpoints source code
     - `/handlers` - handlers for all endpoints, refer to path of x-eov-operation-handler and x-eov-operation-id in `/server/common/api.yml`
     - `/services` - internal services for controllers to use, like DB service and internal API call service 
   - `/cert` - place the server's HTTPS crt and key file here (remind to use the HTTPS codes in `server/app.js`)
-  - `/common` - `api.yml` for describe the API server following OpenAPI specification, `db.connection.js` for establishing DB connection in basic level, and `logger.js` using `log4js` library to prettier the log output
-  - `/middlewares` - store express middlewares like error handler
+  - `/common` - `db.connection.js` for establishing DB connection in basic level, and `logger.js` using `log4js` library to prettier the log output
   - `app.js` - create a server application
 - `/test` - testing programs using `Mocha` framework to test the endpoints or code unit tests
 
@@ -77,4 +77,3 @@ docker run -d --name my_app -p 3000:3000 my_app
 # 5 Reference
 
 - [OpenAPI 3.0 Specification](https://swagger.io/specification/)
-- [express-openapi-validator](https://github.com/cdimascio/express-openapi-validator)
