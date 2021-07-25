@@ -10,8 +10,6 @@ paths:
   /example:
     post:
       summary: Example API for testing Axios and DB connection
-      x-eov-operation-id: example
-      x-eov-operation-handler: ../api/handlers/handler
       responses:
         200:
           description: Success
@@ -21,8 +19,6 @@ paths:
   /file:
     post:
       summary: Example API for testing file upload
-      x-eov-operation-id: fileUpload
-      x-eov-operation-handler: ../api/handlers/handler
       requestBody:
         description: Example body
         content:

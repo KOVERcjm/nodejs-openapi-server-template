@@ -3,6 +3,8 @@ require('dotenv').config();
 const http = require('http');
 // const https = require('https');
 const Koa = require('koa');
+const OpenApiValidator = require('koa-openapi-validator');
+const path = require('path');
 const logger = require('./common/logger').getLogger('[Sever]');
 const router = require('./api/handlers/router');
 
@@ -18,7 +20,18 @@ app.use(require('koa-json')());
 app.use(require('koa-logger')());
 app.use(require('koa-static')(`${__dirname}/public`));
 
-// TODO: Add OpenAPI 3 Validator
+// TODO: Integrate with OpenAPI 3 Validator
+const apiSpec = path.join(__dirname, '../public/api.yml');
+const validateResponses = !!(
+  process.env.OPENAPI_ENABLE_RESPONSE_VALIDATION &&
+  process.env.OPENAPI_ENABLE_RESPONSE_VALIDATION.toLowerCase() === 'true'
+);
+app.use(
+  OpenApiValidator.middleware({
+    apiSpec,
+    validateResponses
+  })
+);
 
 app.use(router.routes()).use(router.allowedMethods());
 

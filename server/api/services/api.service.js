@@ -14,7 +14,7 @@ const call = async (l, method, baseURL, url, data) => {
     data,
     httpsAgent: new https.Agent({ rejectUnauthorized: false }),
     validateStatus(status) {
-      return 2 === parseInt(status / 100, 10);
+      return parseInt(status / 100, 10) === 2;
     }
   }).catch(error => {
     if (error.response) {
