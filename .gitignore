@@ -1,2 +1,13 @@
+# Ignore MacOS Related
 .DS_Store
+
+# Ignore JetBrains Related
 .idea
+
+# Ignore Node.js Related
+dist
+node_modules
+package-lock.json
+
+# Ignore private information
+server/cert

@@ -9,8 +9,8 @@
     "dev:debug": "nodemon server/app.js --exec babel-node --config .nodemonrc.json --inspect",
     "test": "mocha --require @babel/register --exit",
     "test:debug": "mocha --require @babel/register --inspect-brk --exit",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix ."
+    "lint": "eslint express_based",
+    "lint:fix": "eslint --fix express_based"
   },
   "dependencies": {
     "axios": "^0.21.1",

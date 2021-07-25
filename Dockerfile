@@ -2,7 +2,7 @@ FROM node:alpine AS builder
 
 WORKDIR /app
 
-COPY . .
+COPY express_based .
 
 RUN npm install \
   && npm run compile \

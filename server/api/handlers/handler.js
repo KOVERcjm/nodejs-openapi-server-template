@@ -4,26 +4,26 @@ const db = require('../services/db.service');
 
 const example = async (req, res) => {
   const l = logger.getLogger(`[${req.method} ${req.url}]`);
-  l.debug(`Endpoint been called.`);
+  l.debug('Endpoint been called.');
 
   // Test API call function (mock Microsoft website as an internal API)
   await api.call(l, 'GET', 'https://www.microsoft.com', '/');
 
   // Test DB connection
-  await db.pgCreate('asdf', 123);
-  await db.pgUpdate('asdf', 456);
-  await db.pgRetrieve('asdf');
-  await db.pgDelete('asdf');
+  await db.pgCreate('test', 123);
+  await db.pgUpdate('test', 456);
+  await db.pgRetrieve('test');
+  await db.pgDelete('test');
 
-  await db.mongoCreate('asdf', 123);
-  await db.mongoUpdate('asdf', 456);
-  await db.mongoRetrieve('asdf');
-  await db.mongoDelete('asdf');
+  await db.mongoCreate('test', 123);
+  await db.mongoUpdate('test', 456);
+  await db.mongoRetrieve('test');
+  await db.mongoDelete('test');
 
-  await db.redisCreate('asdf', 123);
-  await db.redisUpdate('asdf', 456);
-  await db.redisRetrieve('asdf');
-  await db.redisDelete('asdf');
+  await db.redisCreate('test', 123);
+  await db.redisUpdate('test', 456);
+  await db.redisRetrieve('test');
+  await db.redisDelete('test');
 
   l.info('Endpoint responded.\n');
   res.status(200).end();
