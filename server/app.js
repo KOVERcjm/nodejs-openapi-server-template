@@ -1,57 +1,47 @@
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const cors = require('cors');
 require('dotenv').config();
-const express = require('express');
-require('express-async-errors');
-const openApiValidator = require('express-openapi-validator');
 // const fs = require('fs');
 const http = require('http');
 // const https = require('https');
-const multer = require('multer');
-const path = require('path');
+const Koa = require('koa');
+const logger = require('./common/logger').getLogger('[Sever]');
+const router = require('./api/handlers/router');
 
-const errorHandler = require('./middlewares/error.handler');
-const logger = require('./common/logger').getLogger('[Server]');
-
-const app = express();
-const apiSpec = path.join(__dirname, 'common/api.yml');
-const validateResponses = !!(
-  process.env.OPENAPI_ENABLE_RESPONSE_VALIDATION &&
-  'true' === process.env.OPENAPI_ENABLE_RESPONSE_VALIDATION.toLowerCase()
-);
-
-app.use(bodyParser.json({ limit: process.env.REQUEST_LIMIT || '100kb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: process.env.REQUEST_LIMIT || '100kb' }));
-app.use(bodyParser.text({ limit: process.env.REQUEST_LIMIT || '100kb' }));
-app.use(cookieParser(process.env.SESSION_SECRET));
-app.use(cors());
-app.use(express.static(path.normalize(`${__dirname}/../public`)));
-app.use(process.env.OPENAPI_SPEC || '/spec', express.static(apiSpec));
+const app = new Koa();
+require('koa-onerror')(app);
+app.use(require('@koa/cors')());
 app.use(
-  openApiValidator.middleware({
-    apiSpec,
-    fileUploader: { storage: multer.memoryStorage() },
-    operationHandlers: path.join(__dirname, 'common'),
-    validateResponses
+  require('koa-bodyparser')({
+    enableTypes: ['json', 'form', 'text']
   })
 );
-app.use(errorHandler);
+app.use(require('koa-json')());
+app.use(require('koa-logger')());
+app.use(require('koa-static')(`${__dirname}/public`));
+
+// TODO: Add OpenAPI 3 Validator
+
+app.use(router.routes()).use(router.allowedMethods());
+
+app.on('error', (err, ctx) => {
+  logger.error(err);
+  logger.debug(ctx);
+});
 
 const port = process.env.PORT;
 const welcome = () => logger.info(`Up and running in ${process.env.NODE_ENV || 'dev'} on port: ${port}\n`);
 
-const server = http.createServer(app).listen(port, welcome);
-
+const server = http.createServer(app.callback()).listen(port);
 // If would like to create https server, use the following lines to replace the above one
 
 // const key = fs.readFileSync(`${__dirname}/cert/private.key`);
 // const cert = fs.readFileSync(`${__dirname}/cert/certificate.crt`);
-// const server = https.createServer({ key, cert }, app).listen(port, welcome);
+// const server = https.createServer({ key, cert }, app.callback()).listen(port);
+
+server.on('listening', welcome);
 
 process.on('exit', () => {
   server.close();
   logger.fatal(`TERMINATED.\n`);
 });
 
-module.export = app;
+module.exports = app;

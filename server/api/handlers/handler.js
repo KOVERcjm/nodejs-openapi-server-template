@@ -1,9 +1,8 @@
-const logger = require('../../common/logger');
+const l = require('../../common/logger').getLogger('[Handler]');
 const api = require('../services/api.service');
 const db = require('../services/db.service');
 
-const example = async (req, res) => {
-  const l = logger.getLogger(`[${req.method} ${req.url}]`);
+const example = async (ctx, next) => {
   l.debug('Endpoint been called.');
 
   // Test API call function (mock Microsoft website as an internal API)
@@ -25,16 +24,7 @@ const example = async (req, res) => {
   await db.redisRetrieve('test');
   await db.redisDelete('test');
 
-  l.info('Endpoint responded.\n');
-  res.status(200).end();
+  ctx.body = { msg: 'Sample response' };
 };
 
-const fileUpload = async (req, res) => {
-  const l = logger.getLogger(`[${req.method} ${req.url}]`);
-  l.info(req.files);
-
-  l.info('Endpoint responded.\n');
-  res.status(200).end();
-};
-
-module.exports = { example, fileUpload };
+module.exports = { example };
