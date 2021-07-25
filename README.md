@@ -1,8 +1,9 @@
-# nodejs-openapi-server-template
+# Node.js OpenAPI Server Template
 A backend API server template based on express, with DB connection of PostgreSQL, Redis and MongoDB.
 
 This server is built using [Node.js](https://nodejs.org/) as programming language and [express](http://expressjs.com/) as web framework, following OpenAPI 3.0 Specification. Due to Node.js [following](https://nodejs.org/en/knowledge/getting-started/what-is-require/) the CommonJS module system, this server will also follow the same specification.
 
+[Koa](https://koajs.com/) version can be found in [this branch](https://github.com/KOVERcjm/nodejs-openapi-server-template/tree/Koa_based).
 
 # 0 Getting started
 Install dependency and initialize DB via Docker (if not existed):
