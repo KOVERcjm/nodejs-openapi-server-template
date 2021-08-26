@@ -2,7 +2,7 @@ const { Sequelize, Model, DataTypes } = require('sequelize');
 const mongoose = require('mongoose');
 const Redis = require('ioredis');
 
-const logger = require('./logger').getLogger('[DB Connection]');
+const logger = require('../middlewares/logger').getLogger('[DB Connection]');
 
 // PostgreSQL Connection
 const _pgConnection = new Sequelize(process.env.PGCONNECTURL, {

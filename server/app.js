@@ -1,9 +1,9 @@
 require('dotenv').config();
-// const fs = require('fs');
 const http = require('http');
+// const fs = require('fs');
 // const https = require('https');
 const Koa = require('koa');
-const logger = require('./common/logger').getLogger('[Sever]');
+const logger = require('./middlewares/logger').getLogger('[Sever]');
 const router = require('./api/handlers/router');
 
 const app = new Koa();

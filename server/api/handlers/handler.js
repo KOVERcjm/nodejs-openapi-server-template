@@ -1,4 +1,4 @@
-const l = require('../../common/logger').getLogger('[Handler]');
+const l = require('../../middlewares/logger').getLogger('[Handler]');
 const api = require('../services/api.service');
 const db = require('../services/db.service');
 
@@ -25,6 +25,7 @@ const example = async (ctx, next) => {
   await db.redisDelete('test');
 
   ctx.body = { msg: 'Sample response' };
+  next();
 };
 
 module.exports = { example };
