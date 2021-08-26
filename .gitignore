@@ -10,4 +10,4 @@ node_modules
 package-lock.json
 
 # Ignore private information
-server/cert
+# server/cert
