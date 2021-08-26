@@ -1,4 +1,4 @@
-const logger = require('../../common/logger');
+const logger = require('../../middlewares/logger');
 const api = require('../services/api.service');
 const db = require('../services/db.service');
 

@@ -1,4 +1,4 @@
-const logger = require('../common/logger');
+const logger = require('./logger');
 
 const errorHandler = (err, req, res, next) => {
   if (req) {

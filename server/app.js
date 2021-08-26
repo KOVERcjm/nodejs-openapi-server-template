@@ -12,7 +12,7 @@ const multer = require('multer');
 const path = require('path');
 
 const errorHandler = require('./middlewares/error.handler');
-const logger = require('./common/logger').getLogger('[Server]');
+const logger = require('./middlewares/logger').getLogger('[Server]');
 
 const app = express();
 const apiSpec = path.join(__dirname, 'common/api.yml');
